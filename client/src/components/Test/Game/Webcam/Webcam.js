@@ -27,8 +27,15 @@ const Webcam = ({ test_id }) => {
 
         const video = videoRef.current
         const photo = photoRef.current
+
+        if (!photo || !video) {
+            return 
+        }
+
         photo.width = width
         photo.height = height
+
+    if (width && height) {
 
         let context = photo.getContext('2d')
         context.drawImage(video, 0, 0, width, height)
@@ -36,6 +43,7 @@ const Webcam = ({ test_id }) => {
         const base64String = photo.toDataURL().split(',')[1]
 
         uploadImage(base64String)
+    }
 
     }
 
